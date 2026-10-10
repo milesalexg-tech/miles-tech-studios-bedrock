@@ -33,4 +33,4 @@ The regressions exercise event-loop responsiveness, queue rejection and shutdown
 
 These checks establish correctness, bounded work, and removal of identified synchronous costs. They do not measure live-server frame times, FPS, or joining-time improvements. Client resource reloads and other workloads still need profiling. No claim is made that every lag spike is eliminated or that this edition is the fastest or most improved version.
 
-Website configuration and workflow YAML were checked; local Jekyll rendering was not performed because the host Ruby differs from the site's CI runtime. Automatic release creation, website deployment, and mod-platform uploads remain disabled; see [edition boundaries](edition.md).
+Website configuration and workflow YAML were checked; local Jekyll rendering was not performed because the host Ruby differs from the site's CI runtime. CI is supplied as disabled templates because the current login cannot upload active workflows. Automatic release creation, website deployment, and mod-platform uploads remain disabled; see [edition boundaries](edition.md).

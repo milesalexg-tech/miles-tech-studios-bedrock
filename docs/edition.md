@@ -14,7 +14,7 @@ Both mutation switches in `edition.json` are disabled. `pr sync` and `pr assign`
 
 Ordinary stack builds, `pr check`, `pr build`, and `pr body` remain available. `bun run mod:publish prepare <tag> <manifest> <changelog>` validates a local artifact and prints draft metadata without uploading. It retains the inherited `stack-v...` validation format for compatibility; this does not create a release.
 
-The inherited automatic release and mod-platform publishing workflows are removed. The website workflow builds a downloadable test artifact with read-only repository permissions; it does not deploy Pages. Enabling future publication needs separately configured edition destinations and an explicit workflow change. Do not reuse StackAnvil platform tokens, listing IDs, domains, or fork branches.
+The inherited automatic release and mod-platform publishing workflows are removed. Build, patch-check, and website workflows are preserved as disabled templates under `.github/workflow-templates/` because the current GitHub login lacks workflow-upload permission. Once deliberately enabled with an authorized login, the website template builds a downloadable test artifact with read-only repository permissions and does not deploy Pages. Enabling future publication needs separately configured edition destinations and an explicit workflow change. Do not reuse StackAnvil platform tokens, listing IDs, domains, or fork branches.
 
 ## Original resources
 

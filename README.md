@@ -22,7 +22,7 @@ Build artifacts go to `dist/`. The edition client bundle is `dist/modpack/Miles-
 
 JAR filenames, Maven coordinates, Fabric mod IDs, resource namespaces, Gradle property names, and `.stackanvil/` working directories retain their existing compatibility identifiers. A filename ending in `-StackAnvil.jar` identifies the inherited build format; it does not change who maintains this edition. Use matching client JARs from the same build and keep only one ViaFabricPlus JAR installed.
 
-[Edition releases](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/releases) will hold edition artifacts when published. Build from source while no release is available. Automatic release creation, mod-platform uploads, and website deployment are disabled. CI can build and upload test artifacts without publishing a release.
+[Edition releases](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/releases) will hold edition artifacts when published. Build from source while no release is available. Automatic release creation, mod-platform uploads, and website deployment are disabled. Build and website CI are supplied as [disabled templates](.github/workflow-templates/README.md). The current GitHub login cannot upload active workflows; local builds and tests were verified before publication.
 
 ## Projects and provenance
 
