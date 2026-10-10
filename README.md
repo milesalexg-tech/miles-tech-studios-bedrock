@@ -2,7 +2,7 @@
 
 An independent Miles Tech Studios edition of the [StackAnvil patch stack](https://github.com/StackAnvil/patches), for connecting Minecraft Java Edition clients to Bedrock Edition worlds through ViaFabricPlus or ViaProxy.
 
-This edition preserves StackAnvil's history, patches, build tooling, and original project credit. It includes tested fixes for repeated actor rendering work, resource decoding, and chunk processing. These changes target specific sources of stalls; no overall performance ranking or benchmark advantage is claimed.
+This edition preserves StackAnvil's history, patches, build tooling, and original project credit. Miles Tech Studios' changes address repeated actor rendering work, resource decoding, chunk processing, and macOS replay preparation. See [the validation record](docs/performance-validation.md) for tests and limits. These changes target specific sources of stalls; no overall performance ranking or benchmark advantage is claimed.
 
 **Project:** [milesalexg-tech/miles-tech-studios-bedrock](https://github.com/milesalexg-tech/miles-tech-studios-bedrock) · [Issues](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/issues) · [Edition boundaries](docs/edition.md) · [Credits](CREDITS.md)
 

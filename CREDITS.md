@@ -15,4 +15,6 @@ The repository keeps its existing [LICENSE](LICENSE). Upstream source trees and 
 
 The existing artwork under `assets/publishing/` was created by the StackAnvil maintainer; it is retained as upstream material and is not presented as newly created Miles Tech Studios artwork. Historical documentation and research retain original project names and source links.
 
-Miles Tech Studios is responsible for maintaining this edition and its changes. This is an independent project, with no claim of endorsement by StackAnvil, ViaVersion, Mojang, or Microsoft.
+Miles Tech Studios maintains this edition and contributed the bounded resource preparation and download decoding, conversion retention limits, chunk work selection and scheduling, actor snapshot and locator caching, macOS replay portability, and edition integration recorded in [the validation notes](docs/performance-validation.md). Original patch authors remain credited in the exported patches and history.
+
+This is an independent project, with no claim of endorsement by StackAnvil, ViaVersion, Mojang, or Microsoft.
