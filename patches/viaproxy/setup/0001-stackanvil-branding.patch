@@ -1,4 +1,4 @@
-From 312ef886be36435dbdc805ef37aa9e5e41224c15 Mon Sep 17 00:00:00 2001
+From 7ab5bafd8d5f9c49a484060be8bd19e40304202a Mon Sep 17 00:00:00 2001
 From: AlexProgrammerDE <40795980+AlexProgrammerDE@users.noreply.github.com>
 Date: Sat, 26 Sep 2026 23:42:21 +0200
 Subject: [PATCH] chore(branding): identify StackAnvil ViaProxy builds and
@@ -10,17 +10,24 @@ Compile and run StackAnvil ViaProxy on Java 25, matching ViaBedrock and
 the client add-on. Resolve the shared MochaFloats 6.1.0 runtime from
 Maven Central without a private repository. Remove the obsolete Java 8 downgraded
 artifact and its build-only compatibility dependencies.
+
+Identify the independently maintained edition while preserving StackAnvil
+artifact coordinates, upstream authors, licenses and resource namespaces.
+
+Do not offer upstream update downloads for the edition compatibility
+version: those releases would replace the patched proxy with an upstream
+build. Edition releases are installed from the separate project channel.
 ---
  build.gradle                                  | 36 +++++-------
  gradle.properties                             |  4 +-
  .../injection/TransformerDowngrader.java      | 57 -------------------
  .../viaproxy/plugins/PluginManager.java       | 16 ------
- .../viaproxy/tasks/UpdateCheckTask.java       |  7 +--
- 5 files changed, 16 insertions(+), 104 deletions(-)
+ .../viaproxy/tasks/UpdateCheckTask.java       |  9 +--
+ 5 files changed, 18 insertions(+), 104 deletions(-)
  delete mode 100644 src/main/java/net/raphimc/viaproxy/injection/TransformerDowngrader.java
 
 diff --git a/build.gradle b/build.gradle
-index 5d23b0c..a90ca18 100644
+index 5d23b0c..1426c1e 100644
 --- a/build.gradle
 +++ b/build.gradle
 @@ -5,14 +5,20 @@ plugins {
@@ -86,7 +93,7 @@ index 5d23b0c..a90ca18 100644
 -    archiveClassifier = null
 -    archiveVersion = project.version + "+java8"
 +tasks.withType(Jar).configureEach {
-+    manifest.attributes("Implementation-Vendor": "StackAnvil")
++    manifest.attributes("Implementation-Vendor": "Miles Tech Studios (based on StackAnvil)")
  }
 -build.finalizedBy("downgradeJar")
  
@@ -205,10 +212,19 @@ index f50cae9..0b48600 100644
          if (viaproxyYml == null) throw new IllegalStateException("Plugin '" + file.getName() + "' does not have a viaproxy.yml");
          final Map<String, Object> yaml = this.yaml.load(viaproxyYml);
 diff --git a/src/main/java/net/raphimc/viaproxy/tasks/UpdateCheckTask.java b/src/main/java/net/raphimc/viaproxy/tasks/UpdateCheckTask.java
-index 089b5b7..9189698 100644
+index 089b5b7..4553a55 100644
 --- a/src/main/java/net/raphimc/viaproxy/tasks/UpdateCheckTask.java
 +++ b/src/main/java/net/raphimc/viaproxy/tasks/UpdateCheckTask.java
-@@ -78,12 +78,11 @@ public class UpdateCheckTask implements Runnable {
+@@ -49,6 +49,8 @@ public class UpdateCheckTask implements Runnable {
+     @SuppressWarnings("UnreachableCode")
+     public void run() {
+         if (VERSION.startsWith("$")) return; // Dev env check
++        // This edition keeps its compatibility suffix and uses an independent release channel.
++        if (VERSION.endsWith("-StackAnvil")) return;
+         try {
+             URL url = new URL("https://api.github.com/repos/RaphiMC/ViaProxy/releases/latest");
+             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+@@ -78,12 +80,11 @@ public class UpdateCheckTask implements Runnable {
              if (updateAvailable) {
                  Logger.LOGGER.warn("You are running an outdated version of ViaProxy! Latest version: " + latestVersion);
                  if (this.hasUI && JarUtil.getJarFile().isPresent()) {
@@ -222,7 +238,7 @@ index 089b5b7..9189698 100644
                              found = true;
                              SwingUtilities.invokeLater(() -> this.showUpdateQuestion(assetObject.get("name").getAsString(), assetObject.get("browser_download_url").getAsString(), latestVersion));
                              break;
-@@ -126,8 +125,4 @@ public class UpdateCheckTask implements Runnable {
+@@ -126,8 +127,4 @@ public class UpdateCheckTask implements Runnable {
          return assetObject.get("name").getAsString().equals(root.get("name").getAsString() + ".jar");
      }
  
@@ -232,4 +248,4 @@ index 089b5b7..9189698 100644
 -
  }
 -- 
-2.56.0
+2.50.1 (Apple Git-155)

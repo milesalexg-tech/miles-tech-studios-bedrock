@@ -1,4 +1,4 @@
-From d9f74e160271100fb847ae6f675517e3a9cc9363 Mon Sep 17 00:00:00 2001
+From 82d4619a3ebc034d618ebe8c01ae5d0dcf0f766d Mon Sep 17 00:00:00 2001
 From: AlexProgrammerDE <40795980+AlexProgrammerDE@users.noreply.github.com>
 Date: Fri, 25 Sep 2026 16:51:34 +0200
 Subject: [PATCH] chore(branding): identify StackAnvil builds and route
@@ -10,14 +10,21 @@ Use upstream convention plugins and the version catalog after its build
 system migration. Keep the verified ViaFabricPlus and API publications
 exclusive to the local repository so newer remote snapshots cannot replace
 the pinned Jenkins artifacts during dependency resolution.
+
+Identify the independently maintained edition while preserving StackAnvil
+artifact coordinates, upstream authors, licenses and resource namespaces.
+
+Route edition support to its own repository and credit its maintainers
+without replacing the original authors or contributor attribution.
 ---
- build.gradle.kts    | 20 ++++++++++++++++++--
- gradle.properties   |  2 +-
- settings.gradle.kts | 13 +++++++++++++
- 3 files changed, 32 insertions(+), 3 deletions(-)
+ build.gradle.kts                   | 20 ++++++++++++++++++--
+ gradle.properties                  |  4 ++--
+ settings.gradle.kts                | 13 +++++++++++++
+ src/main/resources/fabric.mod.json | 15 ++++++++++-----
+ 4 files changed, 43 insertions(+), 9 deletions(-)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index d4f1528..504fafc 100644
+index d4f1528..aed1358 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -5,10 +5,26 @@ plugins {
@@ -37,7 +44,7 @@ index d4f1528..504fafc 100644
 +}
 +
 +tasks.withType<Jar>().configureEach {
-+    manifest.attributes["Implementation-Vendor"] = "StackAnvil"
++    manifest.attributes["Implementation-Vendor"] = "Miles Tech Studios (based on StackAnvil)"
 +}
 +
  dependencies {
@@ -50,18 +57,20 @@ index d4f1528..504fafc 100644
          exclude(group = "at.yawk.lz4", module = "lz4-java")
          exclude(group = "io.netty")
 diff --git a/gradle.properties b/gradle.properties
-index b1e89c3..5d9a6a6 100644
+index b1e89c3..cdd5efd 100644
 --- a/gradle.properties
 +++ b/gradle.properties
-@@ -7,7 +7,7 @@ jvm_version=25
+@@ -7,8 +7,8 @@ jvm_version=25
  
  project_group=com.viaversion
  project_name=viafabricplus-bedrock
 -project_version=1.1.1-SNAPSHOT
+-project_description=Minecraft: Bedrock Edition support for the ViaFabricPlus mod.
 +project_version=1.1.1-StackAnvil
- project_description=Minecraft: Bedrock Edition support for the ViaFabricPlus mod.
++project_description=Independent Miles Tech Studios Bedrock edition, based on StackAnvil and ViaFabricPlus Bedrock.
  
  publish_owner_id=florianreuth
+ publish_owner_name=Florian Reuth
 diff --git a/settings.gradle.kts b/settings.gradle.kts
 index 9b57f98..c4d1e0e 100644
 --- a/settings.gradle.kts
@@ -86,5 +95,41 @@ index 9b57f98..c4d1e0e 100644
          maven("https://repo.viaversion.com")
          maven("https://maven.lenni0451.net/everything")
          maven("https://repo.opencollab.dev/maven-snapshots") {
+diff --git a/src/main/resources/fabric.mod.json b/src/main/resources/fabric.mod.json
+index 8db2348..713db1c 100644
+--- a/src/main/resources/fabric.mod.json
++++ b/src/main/resources/fabric.mod.json
+@@ -2,7 +2,7 @@
+   "schemaVersion": 1,
+   "id": "viafabricplus-bedrock",
+   "version": "${version}",
+-  "name": "ViaFabricPlus Bedrock",
++  "name": "Miles Tech Studios Bedrock",
+   "description": "${description}",
+   "authors": [
+     {
+@@ -19,13 +19,18 @@
+       "contact": {
+         "homepage": "https://github.com/florianreuth/viafabricplus-bedrock/graphs/contributors"
+       }
++    },
++    {
++      "name": "Miles Tech Studios (edition maintenance and performance work)",
++      "contact": {
++        "homepage": "https://github.com/milesalexg-tech/miles-tech-studios-bedrock"
++      }
+     }
+   ],
+   "contact": {
+-    "homepage": "https://florianreuth.de/",
+-    "sources": "https://github.com/florianreuth/viafabricplus-bedrock",
+-    "issues": "https://github.com/florianreuth/viafabricplus-bedrock/issues",
+-    "email": "florian@florianreuth.de"
++    "homepage": "https://github.com/milesalexg-tech/miles-tech-studios-bedrock",
++    "sources": "https://github.com/milesalexg-tech/miles-tech-studios-bedrock",
++    "issues": "https://github.com/milesalexg-tech/miles-tech-studios-bedrock/issues"
+   },
+   "license": "GPL-v3",
+   "icon": "assets/viafabricplus-bedrock/icon.png",
 -- 
-2.55.0
+2.50.1 (Apple Git-155)
