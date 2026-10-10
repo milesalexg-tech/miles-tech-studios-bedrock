@@ -7,7 +7,7 @@ import { promisify } from "node:util";
 import { Effect } from "effect";
 import { root } from "../model.ts";
 import { artifact } from "../client-artifacts.ts";
-import { installPrism } from "../prism.ts";
+import { installPrism, prismInstance } from "../prism.ts";
 import { activeDisplay, displayEnv, ensureDisplay, stopDisplay } from "./display.ts";
 import { vmMain } from "./vm.ts";
 
@@ -17,7 +17,7 @@ const processFile = join(privateRoot, "processes.json");
 const serverHome = resolve(process.env.BEDROCK_SERVER_HOME ?? join(homedir(), "bedrock-server"));
 const bedrockHome = resolve(process.env.BEDROCK_ON_LINUX_HOME ?? join(homedir(), ".local", "share", "bedrock-on-linux"));
 const prismHome = join(homedir(), ".var", "app", "org.prismlauncher.PrismLauncher", "data", "PrismLauncher", "instances");
-const javaInstance = process.env.STACKANVIL_JAVA_INSTANCE ?? "StackAnvil 26.3";
+export const javaInstance = prismInstance;
 
 type Service = "server" | "viaproxy" | "java";
 type Managed = Partial<Record<Service, { pid: number; startedAt: string; command: string }>>;
@@ -241,5 +241,7 @@ async function main(): Promise<void> {
   throw new Error("Usage: bun run lab <doctor|status|credentials snapshot|server start|viaproxy start|java start|up|down|jvm ...|vm ...>");
 }
 
-Effect.runPromise(Effect.tryPromise({ try: main, catch: (cause) => cause instanceof Error ? cause : new Error(String(cause)) }))
-  .catch((error: unknown) => { console.error(error instanceof Error ? error.message : error); process.exitCode = 1; });
+if (import.meta.main) {
+  Effect.runPromise(Effect.tryPromise({ try: main, catch: (cause) => cause instanceof Error ? cause : new Error(String(cause)) }))
+    .catch((error: unknown) => { console.error(error instanceof Error ? error.message : error); process.exitCode = 1; });
+}

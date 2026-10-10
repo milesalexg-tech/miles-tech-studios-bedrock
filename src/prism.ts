@@ -7,11 +7,13 @@ import { promisify } from "node:util";
 import { root } from "./model.ts";
 import { clientArtifacts } from "./client-artifacts.ts";
 import { edition } from "./edition.ts";
+import { prismInstance } from "./prism-instance.ts";
+
+export { prismInstance } from "./prism-instance.ts";
 
 const execute = promisify(execFile);
 const bundleRoot = join(root, ".stackanvil", "prism-bundle");
 const prismHome = join(homedir(), ".var", "app", "org.prismlauncher.PrismLauncher", "data", "PrismLauncher", "instances");
-const prismInstance = process.env.STACKANVIL_JAVA_INSTANCE ?? `${edition.name} 26.3`;
 
 async function prepareFiles(): Promise<{ directory: string; version: string }> {
   const { baseJar, addonJar, version, loader } = await clientArtifacts();
