@@ -56,15 +56,23 @@ test("publishing CLI rejects upload commands before reading artifacts", async ()
   }
 });
 
-test("remaining edition workflows cannot publish releases, listings or Pages", async () => {
-  const directory = join(root, ".github/workflows");
-  const files = await readdir(directory);
-  expect(files).not.toContain("release.yml");
-  expect(files).not.toContain("publish-vfp-vb-addon.yml");
-  for (const file of files.filter((name) => /\.ya?ml$/.test(name))) {
-    const workflow = await readFile(join(directory, file), "utf8");
-    expect(workflow).not.toMatch(/contents:\s*write|pages:\s*write|id-token:\s*write/);
-    expect(workflow).not.toContain("actions/deploy-pages");
-    expect(workflow).not.toContain("gh release create");
+test("edition workflows and disabled templates cannot publish releases, listings or Pages", async () => {
+  let checked = 0;
+  for (const location of [".github/workflows", ".github/workflow-templates"]) {
+    const directory = join(root, location);
+    const files = await readdir(directory).catch((error: NodeJS.ErrnoException) => {
+      if (error.code === "ENOENT") return [];
+      throw error;
+    });
+    expect(files).not.toContain("release.yml");
+    expect(files).not.toContain("publish-vfp-vb-addon.yml");
+    for (const file of files.filter((name) => /\.ya?ml$/.test(name))) {
+      const workflow = await readFile(join(directory, file), "utf8");
+      expect(workflow).not.toMatch(/contents:\s*write|pages:\s*write|id-token:\s*write/);
+      expect(workflow).not.toContain("actions/deploy-pages");
+      expect(workflow).not.toContain("gh release create");
+      checked++;
+    }
   }
+  expect(checked).toBeGreaterThan(0);
 });

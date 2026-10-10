@@ -10,7 +10,7 @@ This edition preserves StackAnvil's history, patches, build tooling, and origina
 
 The player instructions are in [site/getting-started.md](site/getting-started.md). Choose either ViaProxy beside a regular Java client, or ViaFabricPlus and its Bedrock add-on in a Fabric client. The add-on embeds ViaBedrock and CubeConverter; those libraries are not separate Fabric mods.
 
-Install Bun, Git, and JDK 25; CubeConverter also needs JDK 17. Build the exact pinned stack with:
+Install Bun, Git, and JDK 25; CubeConverter also needs JDK 17. If the build cannot discover them, set `STACKANVIL_JAVA_17` and `STACKANVIL_JAVA_25` to their JDK home directories. Set `JAVA_HOME` to JDK 25 and add its `bin` directory to `PATH` when running the tooling tests, whose optional audit checks compile Java fixtures after artifacts exist. Build the exact pinned stack with:
 
 ```bash
 bun install --frozen-lockfile

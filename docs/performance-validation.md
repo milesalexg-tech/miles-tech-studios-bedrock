@@ -20,7 +20,7 @@ Changes stay in their owning patches. Selected subpacks, builtin resource layers
 | ViaFabricPlus Bedrock add-on | 784 | 120 | 0 |
 | ViaProxy | 4 | 0 | 0 |
 | CubeConverter | 18 | 0 | 0 |
-| Bun tooling | 213 | 4 | 0 |
+| Bun tooling | 216 | 1 | 0 |
 | Python process-inspection regressions | 6 | 0 | 0 |
 
 All four generated projects build through `bun run build all` from a clean checkout with the pinned upstream client. Core Checkstyle and add-on access-widener validation pass. The standalone first resource-cache patch applies to the pinned upstream base without setup or deferred patches and passes 45 tests plus both Checkstyle tasks.
