@@ -5,6 +5,8 @@ nav_order: 4
 description: Build and inspect a StackAnvil patch stack locally.
 ---
 
+This Miles Tech Studios edition is based on [StackAnvil](https://github.com/StackAnvil/patches). Original licenses and credit remain intact; internal StackAnvil names are compatibility identifiers. Automated upstream PR and platform publishing are disabled.
+
 # Build from source
 {: .no_toc }
 
@@ -22,7 +24,7 @@ Install [Bun](https://bun.sh/), Git, and the JDK for your project. The [project 
 
 ## Build ViaBedrock
 
-1. Clone the [patches repository](https://github.com/StackAnvil/patches) and enter it.
+1. Clone the [patches repository](https://github.com/milesalexg-tech/miles-tech-studios-bedrock) and enter it.
 2. Install the tooling dependencies.
 3. Apply the pinned upstream source and patch series.
 4. Build the project.
@@ -50,8 +52,8 @@ bun run build all
 bun run bundle
 ```
 
-The build creates the four StackAnvil JARs and downloads the pinned upstream ViaFabricPlus JAR. The add-on embeds the StackAnvil ViaBedrock and CubeConverter libraries. The bundle command creates `dist/modpack/StackAnvil-26.3.mrpack` with both client mods and the Minecraft and Fabric version pins. See [downloads]({{ '/releases/' | relative_url }}) for prebuilt artifacts.
+The edition build creates the four compatible StackAnvil-named JARs and downloads the pinned upstream ViaFabricPlus JAR. The add-on embeds the StackAnvil ViaBedrock and CubeConverter libraries. The bundle command creates `dist/modpack/Miles-Tech-Studios-26.3.mrpack` with both client mods and the Minecraft and Fabric version pins. See [downloads]({{ '/releases/' | relative_url }}) for prebuilt artifacts.
 
-To use a published JAR as a dependency, follow the [Maven and Javadocs guide]({{ '/libraries/' | relative_url }}). It gives the repository URL, Gradle coordinates, and API reference links.
+The [libraries guide]({{ '/libraries/' | relative_url }}) distinguishes local edition builds from original StackAnvil Maven publications.
 
-For local client and server tests, use the [capture lab guide](https://github.com/StackAnvil/patches/blob/main/docs/capture-lab.md). Keep credentials, captures, and screenshots in ignored local paths.
+For local client and server tests, use the [capture lab guide](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/blob/main/docs/capture-lab.md). Keep credentials, captures, and screenshots in ignored local paths.

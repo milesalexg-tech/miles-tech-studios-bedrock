@@ -1,39 +1,9 @@
-# StackAnvil Bedrock Addon for ViaFabricPlus
+# Miles Tech Studios Bedrock for ViaFabricPlus
 
-Connect to Bedrock Edition servers from a Minecraft Java Edition client with Fabric. This experimental StackAnvil build extends [ViaFabricPlus Bedrock](https://github.com/ViaVersionAddons/viafabricplus-bedrock) with patches that are under upstream review. It is not an official ViaVersion release.
+An independent Miles Tech Studios edition of the [StackAnvil patch stack](https://github.com/StackAnvil/patches), based on [ViaFabricPlus Bedrock](https://github.com/ViaVersionAddons/viafabricplus-bedrock), [ViaBedrock](https://github.com/ViaVersionAddons/ViaBedrock), [ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus), [ViaProxy](https://github.com/ViaVersion/ViaProxy), and [CubeConverter](https://github.com/oryxel1/CubeConverter).
 
-Visit the [StackAnvil website](https://stackanvil.pistonmaster.net/) for the project overview, build guides, and release information.
+Connect a Minecraft Java Edition Fabric client to Bedrock Edition worlds using ViaFabricPlus and its Bedrock add-on. Install matching client JARs from the same edition build; the add-on embeds its protocol and conversion libraries. See the [edition source and player guide](https://github.com/milesalexg-tech/miles-tech-studios-bedrock).
 
-## Install
+This is draft edition description text, not a published platform listing. No edition Modrinth or CurseForge upload is configured. Existing StackAnvil listings are upstream resources and distribute original StackAnvil builds.
 
-1. Use Minecraft Java Edition 26.3 with Fabric Loader.
-2. Install ViaFabricPlus and this add-on in the same client. For the tested pairing, get the pinned upstream ViaFabricPlus JAR from the [matching StackAnvil release](https://github.com/StackAnvil/patches/releases).
-3. Keep only one ViaFabricPlus JAR in your mods folder. If your launcher installed another copy, remove the duplicate.
-
-The add-on includes the patched ViaBedrock and CubeConverter libraries. Do not install those library JARs as separate Fabric mods.
-
-For a prepared client, import the `.mrpack` from the matching GitHub release into a launcher that supports Modrinth modpacks.
-
-## Bedrock features
-
-- Connect to Bedrock servers. Sign in with your Microsoft account for online mode servers.
-- Open Bedrock Friends and Realms from the ViaFabricPlus screen. View friends, requests, joinable worlds, parties, and Realms.
-- Render Bedrock custom entities and player skins.
-- Use the classic Dressing Room to select Steve or Alex, or import a skin and cape.
-
-Some Bedrock behavior remains experimental. Test this build before you rely on it for a long session.
-
-## Guides and support
-
-- [StackAnvil website](https://stackanvil.pistonmaster.net/): project overview and patch stacks.
-- [Player guide](https://stackanvil.pistonmaster.net/getting-started/): install ViaFabricPlus and this add-on, then join Bedrock worlds.
-- [Build from source](https://stackanvil.pistonmaster.net/build-from-source/): compile the patch stack.
-- [Downloads](https://stackanvil.pistonmaster.net/releases/): release JARs and the client modpack.
-- [Discord](https://discord.gg/F4ZyEtXXge): questions and community discussion.
-- [Issue tracker](https://github.com/StackAnvil/patches/issues): report a reproducible StackAnvil build problem.
-
-## Source and credits
-
-See the [StackAnvil source and patch series](https://github.com/StackAnvil/patches) for the changes in this build. This fork builds on the work of [Florian Reuth and ViaFabricPlus Bedrock contributors](https://github.com/ViaVersionAddons/viafabricplus-bedrock), [ViaBedrock contributors](https://github.com/ViaVersionAddons/ViaBedrock), [ViaFabricPlus contributors](https://github.com/ViaVersion/ViaFabricPlus), and [CubeConverter contributors](https://github.com/oryxel1/CubeConverter).
-
-ViaFabricPlus Bedrock is licensed under GPLv3. The project page text was drafted with AI assistance. The icon was hand-drawn in GIMP by the StackAnvil maintainer.
+Original creators, licenses, copyright notices, and patch authorship are retained; see [credits](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/blob/main/CREDITS.md). Miles Tech Studios maintains this edition independently of StackAnvil and ViaVersion. The existing publishing artwork remains credited to the StackAnvil maintainer.

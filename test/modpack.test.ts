@@ -32,6 +32,9 @@ test("modpack preserves verified client bytes and refuses incompatible or corrup
     const pack = await Effect.runPromise(bundleModpack(artifacts, relative(process.cwd(), output), pin));
     const original = await readFile(pack);
     const index = JSON.parse(execFileSync("unzip", ["-p", pack, "modrinth.index.json"], { encoding: "utf8" }));
+    expect(basename(pack)).toBe("Miles-Tech-Studios-26.3.mrpack");
+    expect(index.name).toBe("Miles Tech Studios Bedrock client");
+    expect(index.summary).toContain("StackAnvil");
     expect(index.dependencies.minecraft).toBe("26.3");
     expect(index.dependencies["fabric-loader"]).toBe("0.19.5");
     expect(index.files).toEqual([]);

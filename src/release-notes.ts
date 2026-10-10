@@ -4,8 +4,9 @@ import { join } from "node:path";
 import { getSeries, getTarget, root, targetIds } from "./model.ts";
 import { parsePatchMessage } from "./patch-message.ts";
 import { releaseDownloadSection } from "./release-downloads.ts";
+import { edition } from "./edition.ts";
 
-const repository = process.env.GITHUB_REPOSITORY ?? "StackAnvil/patches";
+const repository = process.env.GITHUB_REPOSITORY ?? edition.repository;
 const commit = process.env.GITHUB_SHA ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
 const groupTitles = { setup: "Setup", upstreamable: "Upstreamable", deferred: "Deferred" } as const;
 const tag = process.argv[2] ?? (process.env.GITHUB_REF_TYPE === "tag" ? process.env.GITHUB_REF_NAME
@@ -24,21 +25,20 @@ async function patchTitle(id: string, group: string, file: string): Promise<stri
 }
 
 const lines = [
-  "# StackAnvil builds", "",
+  `# ${edition.name} builds`, "",
   ...releaseDownloadSection(repository, tag, assets),
-  "The StackAnvil JARs contain experimental patch stacks. The ViaFabricPlus JAR is an unchanged, pinned upstream Jenkins build.", "",
-  "Setup patches prepare StackAnvil builds. Upstreamable patches can become our PRs. Deferred patches track work that another contributor already owns upstream.", "",
+  `This independent edition is based on [StackAnvil](https://github.com/${edition.upstreamRepository}) and the credited ViaVersion, ViaBedrock, ViaFabricPlus Bedrock, ViaProxy, and CubeConverter projects. Internal StackAnvil JAR names and Maven coordinates remain unchanged for compatibility. The ViaFabricPlus JAR is an unchanged, pinned upstream Jenkins build.`, "",
+  "Setup patches prepare compatible local builds. Upstreamable patches describe focused changes. Deferred patches track work another contributor already owns upstream. Automated upstream PR and platform publishing are disabled for this edition.", "",
   "## Play from Java Edition", "",
   "### Bedrock client modpack", "",
-  "Import `StackAnvil-26.3.mrpack` into a launcher that supports Modrinth modpacks, such as Modrinth App, Prism Launcher, or ATLauncher. The pack contains this release's exact ViaFabricPlus and Bedrock add-on JARs. It selects Minecraft 26.3 with Fabric Loader 0.19.5. Sign in with your own Java Edition account.", "",
+  `Import \`${edition.bundlePrefix}-26.3.mrpack\` into a launcher that supports Modrinth modpacks, such as Modrinth App, Prism Launcher, or ATLauncher. The pack contains this release's exact ViaFabricPlus and Bedrock add-on JARs. It selects Minecraft 26.3 with Fabric Loader 0.19.5. Sign in with your own Java Edition account.`, "",
   "### ViaProxy", "",
   "Download the `ViaProxy-...-StackAnvil.jar` file. Run it beside your regular Java client, enter the Bedrock server address and version, and select Start. Join the address shown by ViaProxy from Java Edition. The JAR includes the patched ViaBedrock build; no client mods are needed.", "",
   "### ViaFabricPlus + Bedrock add-on", "",
-  "**Bedrock add-on downloads:** [CurseForge](https://www.curseforge.com/minecraft/mc-mods/stackanvil-bedrock-addon-for-viafabricplus).", "",
   "For Minecraft Java Edition 26.3 with Fabric Loader 0.19.5, install the `ViaFabricPlus-...jar` and `viafabricplus-bedrock-...-StackAnvil.jar` files from this release in the same client's mods folder. The ViaFabricPlus JAR is a copy of the pinned upstream Jenkins artifact. The add-on includes the patched ViaBedrock and CubeConverter libraries, so do not install those JARs as separate Fabric mods.", "",
-  "See the [player guide](https://stackanvil.pistonmaster.net/getting-started/) for connection and sign-in steps for both setups.", "",
+  `See the [player guide](https://github.com/${edition.repository}/blob/main/site/getting-started.md) for connection and sign-in steps for both setups.`, "",
   "## Libraries for developers", "",
-  "The CubeConverter and ViaBedrock JARs are also available for projects that use those libraries. The [StackAnvil Maven repository](https://github.com/StackAnvil/maven) publishes the four StackAnvil builds under the matching release version.", "",
+  "The CubeConverter and ViaBedrock JARs are also available for projects using those libraries. The [StackAnvil Maven repository](https://github.com/StackAnvil/maven) is maintained by the upstream StackAnvil project and does not publish this edition. This edition builds its dependencies into a private local Maven directory.", "",
 ];
 const viaFabricPlusPin = JSON.parse(await readFile(join(root, "viafabricplus.json"), "utf8")) as { build: number; commit: string; version: string };
 lines.push("## ViaFabricPlus", "", `- Upstream Jenkins build: [#${viaFabricPlusPin.build}](https://ci.viaversion.com/job/ViaFabricPlus/${viaFabricPlusPin.build}/)`,

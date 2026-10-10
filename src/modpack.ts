@@ -7,6 +7,7 @@ import { Effect } from "effect";
 import { clientArtifacts } from "./client-artifacts.ts";
 import { root } from "./model.ts";
 import type { ViaFabricPlusPin } from "./viafabricplus.ts";
+import { edition } from "./edition.ts";
 
 const execute = promisify(execFile);
 
@@ -36,15 +37,15 @@ export const bundleModpack = Effect.fn("bundleModpack")(function* (
           formatVersion: 1,
           game: "minecraft",
           versionId,
-          name: "StackAnvil Bedrock client",
-          summary: "ViaFabricPlus and the StackAnvil Bedrock add-on for Minecraft Java Edition.",
+          name: `${edition.name} client`,
+          summary: "Miles Tech Studios edition of the StackAnvil Bedrock client, with ViaFabricPlus and credited upstream projects.",
           files: [],
           dependencies: { minecraft: version, "fabric-loader": loader },
         }, null, 2)}\n`);
         const archive = join(staging, "pack.mrpack");
         await execute("zip", ["-q", "-r", archive, "modrinth.index.json", "client-overrides"], { cwd: staging });
         await execute("unzip", ["-tq", archive]);
-        const output = join(outputDir, `StackAnvil-${version}.mrpack`);
+        const output = join(outputDir, `${edition.bundlePrefix}-${version}.mrpack`);
         await rename(archive, output);
         return output;
       } finally {

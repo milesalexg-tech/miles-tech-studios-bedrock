@@ -6,11 +6,12 @@ import { basename, join } from "node:path";
 import { promisify } from "node:util";
 import { root } from "./model.ts";
 import { clientArtifacts } from "./client-artifacts.ts";
+import { edition } from "./edition.ts";
 
 const execute = promisify(execFile);
 const bundleRoot = join(root, ".stackanvil", "prism-bundle");
 const prismHome = join(homedir(), ".var", "app", "org.prismlauncher.PrismLauncher", "data", "PrismLauncher", "instances");
-const prismInstance = process.env.STACKANVIL_JAVA_INSTANCE ?? "StackAnvil 26.3";
+const prismInstance = process.env.STACKANVIL_JAVA_INSTANCE ?? `${edition.name} 26.3`;
 
 async function prepareFiles(): Promise<{ directory: string; version: string }> {
   const { baseJar, addonJar, version, loader } = await clientArtifacts();
@@ -33,7 +34,7 @@ async function prepareFiles(): Promise<{ directory: string; version: string }> {
     formatVersion: 1,
   };
   await writeFile(join(bundleRoot, "mmc-pack.json"), `${JSON.stringify(pack, null, 2)}\n`);
-  await writeFile(join(bundleRoot, "instance.cfg"), `[General]\nConfigVersion=1.3\nInstanceType=OneSix\nAutomaticJava=true\nOverrideJavaLocation=false\nname=StackAnvil ${version}\niconKey=default\n`);
+  await writeFile(join(bundleRoot, "instance.cfg"), `[General]\nConfigVersion=1.3\nInstanceType=OneSix\nAutomaticJava=true\nOverrideJavaLocation=false\nname=${edition.name} ${version}\niconKey=default\n`);
   return { directory: bundleRoot, version };
 }
 
@@ -41,7 +42,7 @@ export async function bundlePrism(): Promise<string> {
   const { directory, version } = await prepareFiles();
   const output = join(root, "dist", "prism");
   await mkdir(output, { recursive: true });
-  const file = join(output, `StackAnvil-${version}-Prism-Launcher_Config.zip`);
+  const file = join(output, `${edition.bundlePrefix}-${version}-Prism-Launcher_Config.zip`);
   await rm(file, { force: true });
   await execute("zip", ["-q", "-r", file, "instance.cfg", "mmc-pack.json", "minecraft"], { cwd: directory });
   await execute("unzip", ["-tq", file]);

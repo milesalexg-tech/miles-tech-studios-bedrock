@@ -2,37 +2,25 @@
 layout: default
 title: Downloads
 nav_order: 3
-description: Download ViaProxy, the tested Fabric client modpack, or matching ViaFabricPlus and Bedrock add-on JARs.
+description: Build or download Miles Tech Studios edition artifacts with compatible StackAnvil JAR names.
 ---
 
-# Download StackAnvil
+# Edition downloads
 
-Choose one of the two ways to play below. The [player guide]({{ '/getting-started/' | relative_url }}) has setup and connection steps.
+[Edition releases](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/releases) will contain edition artifacts when published. Until then, follow [build from source]({{ '/build-from-source/' | relative_url }}). CI test artifacts are not published releases. Automatic release creation and platform uploads are disabled.
 
-**Bedrock add-on downloads:** [CurseForge](https://www.curseforge.com/minecraft/mc-mods/stackanvil-bedrock-addon-for-viafabricplus).
+## Fabric client
 
-The [latest StackAnvil release on GitHub](https://github.com/StackAnvil/patches/releases/latest) has the JARs and client modpack under **Assets**.
+Import `Miles-Tech-Studios-26.3.mrpack` into a launcher supporting Modrinth modpacks. It includes the verified ViaFabricPlus and Bedrock add-on JARs and the supported Minecraft and Fabric Loader pins.
 
-## ViaProxy: use your regular Java client
+For manual installation, use both `ViaFabricPlus-...jar` and `viafabricplus-bedrock-...-StackAnvil.jar` from the same edition build. Keep one ViaFabricPlus JAR installed. The add-on embeds ViaBedrock and CubeConverter; do not install those libraries as separate Fabric mods.
 
-Download `ViaProxy-...-StackAnvil.jar`. Run it as a separate app, enter the Bedrock server address and version, then join the address it shows from Minecraft Java Edition. You do not need client mods. This JAR includes the patched ViaBedrock build.
+## ViaProxy and libraries
 
-## ViaFabricPlus + Bedrock add-on: use a Fabric client
+Run `ViaProxy-...-StackAnvil.jar` as a separate proxy beside a regular Java client. Developer builds also provide `ViaBedrock-...-StackAnvil.jar` and `cubeconverter-...-StackAnvil.jar`.
 
-Get the add-on using the download links above. For the tested pair, download **both** `ViaFabricPlus-...jar` and `viafabricplus-bedrock-...-StackAnvil.jar` from the **same GitHub release**. Install Fabric Loader for the Minecraft version shown on that release and put both JARs in the client's `mods` folder. Keep only one ViaFabricPlus JAR there.
+These internal filenames preserve compatibility with the original stack. Miles Tech Studios branding identifies the distribution; original component names, credit, and licenses remain unchanged.
 
-The add-on includes its patched ViaBedrock and CubeConverter libraries. Do not install those library JARs as separate Fabric mods. New files on mod platforms can remain under review after the GitHub release appears.
+## Upstream resources
 
-## Client modpack
-
-Download `StackAnvil-26.3.mrpack` and import it into a launcher that supports Modrinth modpacks. Modrinth App, Prism Launcher, and ATLauncher support this format. The pack includes the exact ViaFabricPlus and Bedrock add-on JARs from the release. It also pins Minecraft 26.3 and Fabric Loader 0.19.5. Use your own Java Edition account.
-
-## Libraries and builds
-
-- **ViaBedrock and CubeConverter:** Download their JARs if you need those libraries for a project. They are not standalone Fabric mods.
-- **Maven dependencies:** Use the [StackAnvil Maven repository](https://stackanvil-maven.pistonmaster.net/) for patched artifacts. The [Maven and Javadocs guide]({{ '/libraries/' | relative_url }}) has a Gradle example, direct artifact links, and API references. Get ViaFabricPlus from [upstream Maven](https://repo.viaversion.com/com/viaversion/viafabricplus/).
-
-{: .warning }
-StackAnvil builds include experimental changes that may still be under upstream review. Test them before relying on them for a long play session or a production server. StackAnvil is independent of ViaVersion.
-
-To make your own build, see [Build from source]({{ '/build-from-source/' | relative_url }}).
+The [original StackAnvil releases](https://github.com/StackAnvil/patches/releases), [Modrinth listing](https://modrinth.com/mod/stackanvil-bedrock-addon), [CurseForge listing](https://www.curseforge.com/minecraft/mc-mods/stackanvil-bedrock-addon-for-viafabricplus), [Maven repository](https://stackanvil-maven.pistonmaster.net/), and [Javadocs](https://stackanvil-jd.pistonmaster.net/) belong to the original project. They distribute and document original StackAnvil builds, not this edition. No edition platform listing or public Maven repository is configured.

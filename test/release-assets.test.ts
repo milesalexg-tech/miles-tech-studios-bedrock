@@ -37,8 +37,8 @@ test("release bundles verified client JARs and ignores stale launcher archives a
     const prism = "StackAnvil-26.3-Prism-Launcher_Config.zip";
     await writeFile(join(artifacts, "prism", prism), "Prism config");
     await mkdir(join(artifacts, "modpack"));
-    const pack = "StackAnvil-26.3.mrpack";
-    await writeFile(join(artifacts, "modpack", pack), "Stale pack");
+    const pack = "Miles-Tech-Studios-26.3.mrpack";
+    await writeFile(join(artifacts, "modpack", "StackAnvil-26.3.mrpack"), "Stale upstream pack");
 
     const released = await prepareReleaseAssets(artifacts, output, projects, pin);
     expect(new Set(released)).toEqual(new Set([

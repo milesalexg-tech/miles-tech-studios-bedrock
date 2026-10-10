@@ -2,7 +2,7 @@ import { expect, test } from "bun:test";
 import { releaseDownloads } from "../src/release-downloads.ts";
 
 const files = [
-  "StackAnvil-26.3.mrpack",
+  "Miles-Tech-Studios-26.3.mrpack",
   "viafabricplus-bedrock-1.1.1-StackAnvil.jar",
   "ViaFabricPlus-5.1.2-SNAPSHOT.jar", "ViaProxy-3.4.15-StackAnvil.jar",
   "ViaBedrock-0.0.31-StackAnvil.jar", "cubeconverter-1.3-StackAnvil.jar",

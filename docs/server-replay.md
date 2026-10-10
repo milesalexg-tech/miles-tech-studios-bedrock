@@ -1,5 +1,7 @@
 # Record and replay a Bedrock server scene
 
+This guide is used by the Miles Tech Studios edition of StackAnvil. Internal paths and runtime identifiers remain unchanged; see [edition boundaries](edition.md) and [credits](../CREDITS.md).
+
 The replay lab records one authenticated connection through ViaBedrock or an official Bedrock client. Local runs replay the captured world without another public server connection.
 
 The recorder saves decrypted packets before ViaBedrock translates them. It excludes login tokens and encryption handshakes. It also saves the decrypted, selected server packs.

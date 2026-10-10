@@ -1,8 +1,8 @@
-title: StackAnvil
-description: Play on Bedrock servers from Minecraft Java Edition with ViaProxy or the ViaFabricPlus Bedrock add-on.
-url: https://stackanvil.pistonmaster.net
-baseurl: ""
-repository: StackAnvil/patches
+title: Miles Tech Studios Bedrock
+description: An independent Miles Tech Studios edition of StackAnvil Bedrock patches, retaining original project credit and licenses.
+url: https://milesalexg-tech.github.io
+baseurl: /miles-tech-studios-bedrock
+repository: milesalexg-tech/miles-tech-studios-bedrock
 theme: just-the-docs
 color_scheme: stackanvil
 search_enabled: true
@@ -28,16 +28,14 @@ heading_anchors: true
 permalink: pretty
 favicon_ico: /assets/images/favicon.svg
 aux_links:
-  CurseForge:
-    - https://www.curseforge.com/minecraft/mc-mods/stackanvil-bedrock-addon-for-viafabricplus
   GitHub:
+    - https://github.com/milesalexg-tech/miles-tech-studios-bedrock
+  StackAnvil upstream:
     - https://github.com/StackAnvil/patches
-  Discord:
-    - https://discord.gg/F4ZyEtXXge
 aux_links_new_tab: true
 gh_edit_link: true
 gh_edit_link_text: Improve this page
-gh_edit_repository: https://github.com/StackAnvil/patches
+gh_edit_repository: https://github.com/milesalexg-tech/miles-tech-studios-bedrock
 gh_edit_branch: main
 gh_edit_source: site
 gh_edit_view_mode: edit

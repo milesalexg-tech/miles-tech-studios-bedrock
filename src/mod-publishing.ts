@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
+import { assertEditionMutationAllowed, edition } from "./edition.ts";
 
 const addon = "viafabricplus-bedrock";
 const viaFabricPlusModrinthId = "rIC2XJV4";
@@ -70,7 +71,7 @@ export function publishVersion(artifact: PublishArtifact, tag: string): string {
 export function modrinthMetadata(artifact: PublishArtifact, tag: string, projectId: string, changelog: string) {
   const version = publishVersion(artifact, tag);
   return {
-    name: `StackAnvil ${tag} (${artifact.version})`,
+    name: `${edition.name} ${tag} (${artifact.version})`,
     version_number: version,
     changelog,
     dependencies: [{ project_id: viaFabricPlusModrinthId, dependency_type: "required" }],
@@ -89,7 +90,7 @@ export function curseForgeMetadata(artifact: PublishArtifact, tag: string, chang
   return {
     changelog,
     changelogType: "markdown",
-    displayName: `StackAnvil ${tag} (${artifact.version})`,
+    displayName: `${edition.name} ${tag} (${artifact.version})`,
     gameVersionNames: [artifact.minecraft, "Fabric", "Client"],
     releaseType: "beta",
     relations: { projects: [{ slug: "viafabricplus", projectID: viaFabricPlusCurseForgeId, type: "requiredDependency" }] },
@@ -107,6 +108,7 @@ async function upload(url: string, headers: Record<string, string>, metadataFiel
 }
 
 export async function publishModrinth(artifact: PublishArtifact, tag: string, changelog: string, projectId: string, token: string): Promise<unknown> {
+  assertEditionMutationAllowed("modPlatforms", projectId);
   if (!projectId || !token) throw new Error("Set MODRINTH_PROJECT_ID and MODRINTH_TOKEN");
   if (projectId !== stackAnvilModrinthId) throw new Error(`Expected the StackAnvil Modrinth project ID ${stackAnvilModrinthId}`);
   return upload("https://api.modrinth.com/v2/version", {
@@ -116,6 +118,7 @@ export async function publishModrinth(artifact: PublishArtifact, tag: string, ch
 }
 
 export async function publishCurseForge(artifact: PublishArtifact, tag: string, changelog: string, projectId: string, token: string): Promise<unknown> {
+  assertEditionMutationAllowed("modPlatforms", projectId);
   if (!/^\d+$/.test(projectId) || !token) throw new Error("Set CURSEFORGE_PROJECT_ID and CURSEFORGE_TOKEN");
   if (projectId !== stackAnvilCurseForgeId) throw new Error(`Expected the StackAnvil CurseForge project ID ${stackAnvilCurseForgeId}`);
   return upload(`https://minecraft.curseforge.com/api/projects/${projectId}/upload-file`, {
@@ -130,6 +133,7 @@ if (import.meta.main) {
     process.exit(2);
   }
   try {
+    if (platform !== "prepare") assertEditionMutationAllowed("modPlatforms");
     const artifact = await readPublishArtifact(manifestPath);
     const changelog = await readFile(changelogPath, "utf8");
     if (!changelog.trim()) throw new Error("The mod changelog is empty");

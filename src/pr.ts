@@ -5,6 +5,7 @@ import { getSeries, getTarget, root, type Target, type UpstreamablePatch } from 
 import { parsePatchMessage } from "./patch-message.ts";
 import { gh, git } from "./process.ts";
 import { prMode, sync } from "./stack.ts";
+import { assertEditionMutationAllowed, edition } from "./edition.ts";
 
 export interface ArtifactReference {
   runId?: string;
@@ -54,7 +55,9 @@ const openPrForHead = Effect.fn("openPrForHead")(function* (target: Target, head
 });
 
 export const updatePrParticipants = Effect.fn("updatePrParticipants")(function* (id: string, prUrl?: string, patchFile?: string) {
+  assertEditionMutationAllowed("upstreamPullRequests");
   const target = yield* Effect.promise(() => getTarget(id));
+  assertEditionMutationAllowed("upstreamPullRequests", target.fork);
   const url = prUrl ?? (yield* openPrForHead(target, prHead(patchFile)))?.url;
   if (!url) return yield* Effect.fail(new Error(`No open PR for ${id} from ${prHead(patchFile)}`));
   const desired = [...new Set(target.prAssignees)];
@@ -101,22 +104,23 @@ export function renderPrBody(
   if (!description.trim()) throw new Error(`The ${id} upstreamable patch needs a commit body describing the change`);
   if (!extraBody.trim()) throw new Error(`The ${id} upstreamable patch needs a non-empty PR extra body`);
   const provenance = patchFile
-    ? `This PR contains [one patch from StackAnvil's ${id} stack](https://github.com/StackAnvil/patches/blob/main/patches/${id}/upstreamable/${patchFile}), applied alone to the pinned upstream base.`
-    : `This is the first upstreamable change from [StackAnvil's ${id} patch stack](https://github.com/StackAnvil/patches/tree/main/patches/${id}/upstreamable). The PR branch contains this patch alone, based on upstream.`;
+    ? `This proposal contains [one patch from ${edition.name}'s ${id} stack](https://github.com/${edition.repository}/blob/main/patches/${id}/upstreamable/${patchFile}), applied alone to the pinned upstream base.`
+    : `This is the first upstreamable change from [${edition.name}'s ${id} patch stack](https://github.com/${edition.repository}/tree/main/patches/${id}/upstreamable). The proposal contains this patch alone, based on upstream.`;
   const lines = [
     `## What this changes`,
     "",
     description.trim(),
     "",
     provenance,
+    `This edition is based on [StackAnvil](https://github.com/${edition.upstreamRepository}); original project credit and licenses are retained.`,
     "",
     extraBody.trim(),
   ];
   if (artifact.runId || artifact.artifactId) {
     lines.push("", "## Test artifacts", "");
-    if (artifact.runId) lines.push(`- [Build run](https://github.com/StackAnvil/patches/actions/runs/${artifact.runId})`);
-    if (artifact.artifactId) lines.push(`- [Download artifacts](https://github.com/StackAnvil/patches/actions/runs/${artifact.runId}/artifacts/${artifact.artifactId})`);
-    lines.push("", "These artifacts are for testing this PR patch. They are separate from StackAnvil's fully patched releases.");
+    if (artifact.runId) lines.push(`- [Build run](https://github.com/${edition.repository}/actions/runs/${artifact.runId})`);
+    if (artifact.artifactId) lines.push(`- [Download artifacts](https://github.com/${edition.repository}/actions/runs/${artifact.runId}/artifacts/${artifact.artifactId})`);
+    lines.push("", "These artifacts test this proposed patch separately from the edition's full builds.");
   }
   return `${lines.join("\n")}\n`;
 }
@@ -136,7 +140,9 @@ export const prBody = Effect.fn("prBody")(function* (id: string, artifact: Artif
 });
 
 export const syncPr = Effect.fn("syncPr")(function* (id: string, artifact: ArtifactReference = {}, patchFile?: string) {
+  assertEditionMutationAllowed("upstreamPullRequests");
   const target = yield* Effect.promise(() => getTarget(id));
+  assertEditionMutationAllowed("upstreamPullRequests", target.fork);
   const series = yield* Effect.promise(() => getSeries(id));
   const upstreamable = selectedPatch(series.upstreamable, patchFile);
   const body = yield* prBody(id, artifact, patchFile);

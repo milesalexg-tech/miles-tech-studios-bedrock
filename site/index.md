@@ -2,41 +2,34 @@
 layout: default
 title: Home
 nav_order: 1
-description: Play on Bedrock servers from Java Edition with ViaProxy or ViaFabricPlus and the Bedrock add-on.
+description: The Miles Tech Studios edition of StackAnvil Bedrock patches for Java Edition clients.
 ---
 
-# StackAnvil
+# Miles Tech Studios Bedrock
 
-<p class="sa-home-lead"><strong>Play on Bedrock servers from Minecraft Java Edition.</strong> Use the StackAnvil ViaProxy build with your regular Java client, or install ViaFabricPlus and our Bedrock add-on in a Fabric client.</p>
+<p class="sa-home-lead"><strong>Connect Minecraft Java Edition clients to Bedrock Edition worlds.</strong> This independent Miles Tech Studios edition builds on StackAnvil, ViaVersion, ViaBedrock, ViaFabricPlus Bedrock, ViaProxy, and CubeConverter.</p>
 
 <div class="sa-actions">
-  <a href="{{ '/getting-started/' | relative_url }}">Start playing</a>
-  <a href="{{ '/releases/' | relative_url }}">See the downloads</a>
+  <a href="{{ '/getting-started/' | relative_url }}">Player guide</a>
+  <a href="{{ '/build-from-source/' | relative_url }}">Build the edition</a>
 </div>
 
 ## Choose how to connect
 
-**Bedrock add-on downloads:** [CurseForge](https://www.curseforge.com/minecraft/mc-mods/stackanvil-bedrock-addon-for-viafabricplus).
+- **ViaProxy:** Run the separate proxy beside a regular Java Edition client.
+- **ViaFabricPlus and the Bedrock add-on:** Install the matching client JARs in Fabric, or import the edition client bundle.
 
-- **ViaProxy:** Run one JAR, enter a Bedrock server address in its window, then join the address ViaProxy shows from your regular Java client. You do not need client mods.
-- **ViaFabricPlus + Bedrock add-on:** Put two matching JARs in a Fabric client's mods folder. Join Bedrock servers from the game's Multiplayer screen, or use the add-on's Friends and Realms menus.
+See [downloads]({{ '/releases/' | relative_url }}) for artifact names and the [player guide]({{ '/getting-started/' | relative_url }}) for connection steps. Build from source while edition releases are not available.
 
-The [player guide]({{ '/getting-started/' | relative_url }}) walks through both setups. The [downloads page]({{ '/releases/' | relative_url }}) lists the JARs and a `.mrpack` with the tested Fabric client mods.
+## About this edition
 
-You play from **Java Edition** with either setup. StackAnvil does not turn a Java server into a Bedrock server or change your singleplayer worlds.
+The edition retains the original patch stack and includes focused fixes for repeated actor rendering work, resource decoding, and chunk processing. No overall performance ranking is claimed without comparative benchmarks.
 
-## What is StackAnvil?
+Internal StackAnvil JAR names, Maven coordinates, and runtime identifiers stay compatible. Original patch authorship, licenses, source notices, and contributor history remain intact. Miles Tech Studios maintains this edition independently of StackAnvil and ViaVersion.
 
-[ViaProxy](https://github.com/ViaVersion/ViaProxy) connects a regular Java client to a Bedrock server through a local proxy. [ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus) and its Bedrock add-on put Bedrock support in a Fabric client. Our builds include changes to ViaProxy, the add-on, and their ViaBedrock and CubeConverter libraries.
+- [Build from source]({{ '/build-from-source/' | relative_url }}).
+- [Projects and provenance]({{ '/projects/' | relative_url }}).
+- [Patch workflow]({{ '/patch-workflow/' | relative_url }}).
+- [Credits](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/blob/main/CREDITS.md).
 
-We publish each change separately for review by the original projects. Players can try the patched builds while that review continues.
-
-This is an independent experimental build, not an official ViaVersion release. Some Bedrock behavior can still fail or differ from the Bedrock game.
-
-## Build or contribute
-
-- [Build from source]({{ '/build-from-source/' | relative_url }}) if you want to compile a project or the full client bundle.
-- [Maven and Javadocs]({{ '/libraries/' | relative_url }}) shows how to use published artifacts and links to each API reference.
-- [Projects]({{ '/projects/' | relative_url }}) explains what each part does.
-- [Patch workflow]({{ '/patch-workflow/' | relative_url }}) explains how changes move toward upstream projects.
-- [Contributing]({{ '/contributing/' | relative_url }}) covers bug reports, testing, and patches.
+[Original StackAnvil releases](https://github.com/StackAnvil/patches/releases), [website](https://stackanvil.pistonmaster.net/), and platform listings are upstream resources. They do not distribute this edition.

@@ -1,4 +1,6 @@
-# StackAnvil contributor instructions
+# Miles Tech Studios edition contributor instructions
+
+This edition is based on StackAnvil. Preserve upstream licenses, credit, patch authorship, and compatibility identifiers. `edition.json` disables inherited upstream PR and platform publishing mutations; read-only PR checks, body preparation, and local builds remain available. See [edition boundaries](docs/edition.md).
 
 This repository stores patch files and the tools that apply them. The generated source checkouts under `.worktrees/` are local Git repositories. Edit and commit there, then export the result back to this repository with `bun run stack rebuild <project>`.
 

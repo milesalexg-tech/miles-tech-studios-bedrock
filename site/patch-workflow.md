@@ -5,6 +5,8 @@ nav_order: 7
 description: How StackAnvil applies, edits, and exports focused patches.
 ---
 
+This Miles Tech Studios edition is based on [StackAnvil](https://github.com/StackAnvil/patches). Original licenses and credit remain intact; internal StackAnvil names are compatibility identifiers. Automated upstream PR and platform publishing are disabled.
+
 # Patch workflow
 {: .no_toc }
 
@@ -44,7 +46,7 @@ If `stack sync` stops, resolve the files in `.worktrees/<project>`, stage them, 
 bun run stack continue <project>
 ```
 
-If `stack rebuild` stops during a cherry-pick, resolve and stage the files, then run `bun run stack rebuild <project>` again. The [full patch workflow](https://github.com/StackAnvil/patches/blob/main/docs/patch-workflow.md) explains recovery, backup refs, and the design behind this tooling.
+If `stack rebuild` stops during a cherry-pick, resolve and stage the files, then run `bun run stack rebuild <project>` again. The [full patch workflow](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/blob/main/docs/patch-workflow.md) explains recovery, backup refs, and the design behind this tooling.
 
 ## Prepare an upstream PR
 
@@ -55,4 +57,4 @@ bun run pr body <project>
 bun run pr check <project>
 ```
 
-The [contributor guide](https://github.com/StackAnvil/patches/blob/main/CONTRIBUTING.md) covers PR preparation and review.
+The [contributor guide](https://github.com/milesalexg-tech/miles-tech-studios-bedrock/blob/main/CONTRIBUTING.md) covers PR preparation and review.

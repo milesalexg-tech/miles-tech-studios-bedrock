@@ -1,5 +1,7 @@
 # Development environment
 
+This guide is used by the Miles Tech Studios edition of StackAnvil. Internal paths and runtime identifiers remain unchanged; see [edition boundaries](edition.md) and [credits](../CREDITS.md).
+
 Use this guide to build the four patch targets with pinned ViaFabricPlus and start a local Bedrock test server.
 
 ## Build the stack
@@ -20,7 +22,7 @@ bun run bundle
 
 The add-on setup includes one compatibility patch for the current ViaBedrock API. The upstream PR branch does not include setup patches.
 
-`bun run bundle` creates `dist/modpack/StackAnvil-26.3.mrpack` with the verified ViaFabricPlus and Bedrock add-on JARs. Import it into a launcher that supports Modrinth modpacks. The pack pins Minecraft 26.3 and Fabric Loader 0.19.5.
+`bun run bundle` creates `dist/modpack/Miles-Tech-Studios-26.3.mrpack` with the verified ViaFabricPlus and Bedrock add-on JARs. Import it into a launcher that supports Modrinth modpacks. The pack pins Minecraft 26.3 and Fabric Loader 0.19.5.
 
 ## Bundled Bedrock resources
 

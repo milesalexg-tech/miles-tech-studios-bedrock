@@ -1,5 +1,7 @@
 # Manual Windows and macOS tests
 
+This guide is used by the Miles Tech Studios edition of StackAnvil. Internal paths and runtime identifiers remain unchanged; see [edition boundaries](edition.md) and [credits](../CREDITS.md).
+
 Use this guide to prepare private Quickemu guests and reproduce launcher, account, and connection problems.
 The VM lab runs on an x86_64 Linux host with KVM. Windows 11 and macOS Sonoma are the default guests.
 All guest disks, installation media, account state, logs, and screenshots stay under ignored `.stackanvil/lab/vms/` directories.

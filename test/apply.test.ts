@@ -50,6 +50,7 @@ test("an interrupted patch apply can continue or abort without losing the series
   await mkdir(join(project, "patches", "fixture", "upstreamable"), { recursive: true });
   await mkdir(join(project, "patches", "fixture", "deferred"), { recursive: true });
   await cp(join(projectRoot, "src"), join(project, "src"), { recursive: true });
+  await cp(join(projectRoot, "edition.json"), join(project, "edition.json"));
   await symlink(join(projectRoot, "node_modules"), join(project, "node_modules"));
   await writeFile(join(project, "targets.json"), JSON.stringify({
     fixture: { upstream: "unused/fixture", fork: "unused/fixture", baseBranch: "main", baseSha, java: "17", buildTask: "build" },

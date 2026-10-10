@@ -1,6 +1,6 @@
-# Contributing to StackAnvil
+# Contributing to Miles Tech Studios Bedrock
 
-For a short overview, start with the [StackAnvil contributing guide](https://stackanvil.pistonmaster.net/contributing/).
+This independent edition builds on [StackAnvil](https://github.com/StackAnvil/patches). Start with [edition boundaries](docs/edition.md) and keep the original projects' credit and licenses intact.
 
 Thanks for helping. A clear bug report, a build result, or a small patch all help us move a feature toward upstream.
 
@@ -35,11 +35,11 @@ Apply the current series with `bun run stack sync <project>`. Make one commit in
 
 If the project has deferred patches, `stack add upstreamable` stops before it changes any files. A maintainer must place the new commit before the deferred commits and rebuild the series.
 
-Before opening the first upstreamable patch as a PR, add a Markdown file beside it with the same name and `.pr.md` instead of `.patch`. For example, `upstreamable/0001-cache-converted-resource-packs.pr.md`. Put PR-specific context, review guidance, and testing steps there. The PR body uses the patch commit body for the change summary and appends this Markdown file. The file must contain text; `pr body` and `pr sync` fail if it is missing or empty.
+Before proposing the first upstreamable patch, add a Markdown file beside it with the same name and `.pr.md` instead of `.patch`. For example, `upstreamable/0001-cache-converted-resource-packs.pr.md`. Put review context and testing steps there. `pr body` uses the patch commit body and appends this Markdown file; it rejects a missing or empty file.
 
 To add a deferred patch, use `bun run stack add <project> deferred --reason "<why another upstream PR covers this change>"`. Include a link to that PR in the reason. Revisit deferred patches when their upstream PRs merge.
 
-Only maintainers run `bun run pr sync <project>`. It force-updates the dedicated `stackanvil/north-star` branch with a lease, then opens or updates one draft upstream PR. Run `bun run pr body <project>` to inspect the proposed text first. Add `--run-id <id>` to link a relevant test artifact run. The PR body is checked before any branch push.
+This edition disables `bun run pr sync <project>` and `bun run pr assign <project>`. The inherited targets still describe StackAnvil-owned forks; these commands must not push their branches or update existing upstream PRs. Run `bun run pr body <project>` to inspect a proposed description locally. Add `--run-id <id>` to link an edition CI artifact run. Coordinate upstream contributions separately with the original projects.
 
 Run `bun run pr check <project>` before proposing the first upstreamable patch. It applies only that patch to the pinned upstream base, without setup or deferred patches.
 

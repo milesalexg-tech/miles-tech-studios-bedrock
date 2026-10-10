@@ -1,3 +1,5 @@
+import { edition } from "./edition.ts";
+
 interface ReleaseDownload {
   title: string;
   description: string;
@@ -5,7 +7,7 @@ interface ReleaseDownload {
 }
 
 const downloads = [
-  { title: "Bedrock client modpack", pattern: /^StackAnvil-.+\.mrpack$/,
+  { title: "Bedrock client modpack", pattern: new RegExp(`^${edition.bundlePrefix}-.+\\.mrpack$`),
     description: "Import into a launcher that supports Modrinth modpacks." },
   { title: "Bedrock add-on", pattern: /^viafabricplus-bedrock-.+-StackAnvil\.jar$/,
     description: "Install in your Fabric client's mods folder alongside ViaFabricPlus." },

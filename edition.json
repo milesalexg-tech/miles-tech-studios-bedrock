@@ -1,0 +1,10 @@
+{
+  "name": "Miles Tech Studios Bedrock",
+  "repository": "milesalexg-tech/miles-tech-studios-bedrock",
+  "upstreamRepository": "StackAnvil/patches",
+  "bundlePrefix": "Miles-Tech-Studios",
+  "mutations": {
+    "upstreamPullRequests": false,
+    "modPlatforms": false
+  }
+}

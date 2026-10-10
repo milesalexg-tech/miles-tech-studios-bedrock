@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "stackanvil-patches",
+      "name": "miles-tech-studios-bedrock",
       "dependencies": {
         "effect": "^4.0.0",
       },

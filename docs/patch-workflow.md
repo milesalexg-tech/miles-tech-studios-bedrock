@@ -1,5 +1,7 @@
 # Patch workflow and Paper research
 
+The Miles Tech Studios edition retains this StackAnvil workflow and its original research credit. [Edition boundaries](edition.md) disable inherited external mutations.
+
 StackAnvil keeps one ordered patch series per upstream project. The source checkout under `.worktrees/<project>` is a disposable Git repository; the `.patch` files and `series.json` in this repository are the saved work. This design comes from Paper's patch workflow, adapted for normal upstream Git repositories and a single upstream PR at a time.
 
 ## What Paper does today
@@ -39,30 +41,20 @@ bun run pr check viabedrock
 bun run build viabedrock
 ```
 
-Before opening a PR, add a non-empty `.pr.md` file beside its `.patch` file. Use it for evidence, review guidance, and test results that do not belong in the commit message. Run `bun run pr body <project>` to inspect the first patch's PR text. Run `bun run pr sync <project>` to update the fork's north-star branch and its PR.
+Before opening a PR, add a non-empty `.pr.md` file beside its `.patch` file. Use it for evidence, review guidance, and test results that do not belong in the commit message. Run `bun run pr body <project>` to inspect the first patch's PR text. This edition disables `pr sync` and `pr assign`; inspect proposals locally and coordinate upstream contributions separately.
 
-To open another upstreamable patch as a separate PR, select its filename with `--patch`. The selected patch must apply alone to the pinned upstream base. The tool uses a separate checkout and fork branch for each patch. It checks for one PR commit before it pushes. The default command still selects the first patch.
+To inspect another upstreamable patch as a separate proposal, select its filename with `--patch`. The selected patch must apply alone to the pinned upstream base. Read-only checks use a separate local checkout. The default command selects the first patch.
 
 ```bash
 bun run pr check viabedrock --patch 0085-resolve-server-effects-relative-to-their-actor.patch
 bun run pr body viabedrock --patch 0085-resolve-server-effects-relative-to-their-actor.patch
-bun run pr sync viabedrock --patch 0085-resolve-server-effects-relative-to-their-actor.patch
 ```
 
-Use the same `--patch` option with `pr build` and `pr assign`. If a selected patch conflicts with upstream, use `bun run stack continue <project> --pr --patch <file>` after you resolve and stage the conflict. Use `stack abort` with the same options to discard that apply.
+Use the same `--patch` option with `pr build`. If a selected patch conflicts with upstream, use `bun run stack continue <project> --pr --patch <file>` after you resolve and stage the conflict. Use `stack abort` with the same options to discard that apply.
 
-## PR assignees and reviewers
+## Upstream mutation policy
 
-`targets.json` lists the default people for each upstream PR. `bun run pr sync <project>` assigns them and requests their reviews on a ready PR. Run `bun run pr assign <project>` to update both without pushing the branch. The tool keeps people added manually and does not request another review from someone who has already reviewed.
-
-| Project | Default assignees and reviewers |
-| --- | --- |
-| ViaBedrock | `RaphiMC` (RK_01), `Exterminate5573` |
-| viafabricplus-bedrock | `RaphiMC`, `Exterminate5573`, `florianreuth` |
-| ViaProxy | `RaphiMC` (RK_01) |
-| CubeConverter | `oryxel1` |
-
-Draft PRs receive assignees. Review requests wait until the PR is ready; then run `bun run pr assign <project>` or `bun run pr sync <project>`. Add `--patch <file>` to target a standalone PR. Assignment needs upstream triage or write access. Review requests need upstream write access. The command reports actions it could not complete, so an upstream maintainer can finish them.
+`targets.json` retains the original fork destinations and participant metadata for provenance and local checks. This edition rejects upstream PR pushes and assignment changes before external mutations, and never writes to StackAnvil-owned forks. Read [edition boundaries](edition.md) before changing that policy.
 
 ## Conflict recovery
 

@@ -23,6 +23,7 @@ test("mod publishing validates the actual build before preparing both platforms"
   expect(publishVersion(artifact, "stack-v1.0.0")).toBe(`${version}+stack-v1.0.0`);
 
   const modrinth = modrinthMetadata(artifact, "stack-v1.0.0", "StackAnvilProject", "Changes");
+  expect(modrinth.name).toContain("Miles Tech Studios Bedrock");
   expect(modrinth.game_versions).toEqual([artifact.minecraft]);
   expect(modrinth.dependencies).toEqual([{ project_id: "rIC2XJV4", dependency_type: "required" }]);
   expect(modrinth.file_parts).toEqual(["file"]);
@@ -41,7 +42,7 @@ test("mod publishing rejects a changed JAR or mismatched compatibility metadata"
   expect(() => validatePublishArtifact(manifest, { ...metadata, depends: { ...metadata.depends, minecraft: ">=26.2" } }, bytes, "/tmp/release")).toThrow(/compatibility/);
 });
 
-test("mod publishing refuses project IDs outside the StackAnvil listings", async () => {
+test("edition publishing rejects all unconfigured destinations", async () => {
   const artifact = validatePublishArtifact(manifest, metadata, bytes, "/tmp/release");
   await expect(publishModrinth(artifact, "stack-v1.0.0", "Changes", "rIC2XJV4", "token")).rejects.toThrow(/StackAnvil/);
   await expect(publishCurseForge(artifact, "stack-v1.0.0", "Changes", "1684810", "token")).rejects.toThrow(/StackAnvil/);
